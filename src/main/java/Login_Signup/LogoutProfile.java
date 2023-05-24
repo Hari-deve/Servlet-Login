@@ -12,8 +12,8 @@ import java.io.PrintWriter;
 public class LogoutProfile extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String loggingOutUser=LoginWelcomePage.userName;
-        LoginWelcomePage.userName=null;
+        String loggingOutUser=LoginCheckServlet.userName;
+        LoginCheckServlet.userName=null;
         PrintWriter out =resp.getWriter();
         out.println("The profile "+loggingOutUser+" was logged out successfully");
     }

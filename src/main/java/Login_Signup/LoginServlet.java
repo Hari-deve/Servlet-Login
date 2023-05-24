@@ -11,7 +11,7 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (LoginWelcomePage.userName == null) {
+        if (LoginCheckServlet.userName == null) {
             resp.setContentType("text/html");
             resp.sendRedirect("LoginWebPage.html");
         }else {

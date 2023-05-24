@@ -8,11 +8,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 
 @WebServlet("/signup")
 public class SignupCheckServlet extends HttpServlet {
+
+
+    static ArrayList<String> storeMail=new ArrayList<String>();
+    static ArrayList<String> storeUserName=new ArrayList<String>();
     public void checkValues(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String alreadyUsedMail=null;
+        String alreadyUsedName=null;
+
         String name=req.getParameter("username");
         String mail=req.getParameter("mail");
         String setPassword=req.getParameter("password");
@@ -25,25 +33,22 @@ public class SignupCheckServlet extends HttpServlet {
         session.setAttribute("mail",mail);
         session.setAttribute("password",setPassword);
 
-        if (setPassword.equals(name+"pass")&&setPassword.equals(confirmPassword)) {
-            for (int i = 0; i< SignupWelcomePage.storeMail.size(); i++){
-                if (mail.equals(SignupWelcomePage.storeMail.get(i))){
-                    resp.sendRedirect("usedMail");
-                }
+
+        for (int i = 0; i< storeMail.size()||i< storeUserName.size(); i++){
+            if (mail.equals(storeMail.get(i))&&i<storeMail.size()){
+                alreadyUsedMail=storeMail.get(i);
+            } else if (name.equals(storeUserName.get(i))&&i< storeUserName.size()) {
+                alreadyUsedName=storeUserName.get(i);
             }
-            try {
-                for (int i = 0; i < SignupWelcomePage.storeUserName.size(); i++) {
-                    if (name.equals(SignupWelcomePage.storeUserName.get(i))) {
-                        resp.sendRedirect("usedUserName");
-                    }
-                }
-            }catch (IllegalStateException e){}
+        }
 
-
-            try {
+        if (setPassword.equals(name+"pass") && setPassword.equals(confirmPassword)) {
+            if (name.equals(alreadyUsedName)){
+                resp.sendRedirect("usedUserName");
+            } else if (mail.equals(alreadyUsedMail)) {
+                resp.sendRedirect("usedMail");
+            }else {
                 resp.sendRedirect("signupWelcome");
-            }catch (IllegalStateException e){
-                out.println("Mail has been used already");
             }
         }else {
             resp.sendRedirect("signupError");

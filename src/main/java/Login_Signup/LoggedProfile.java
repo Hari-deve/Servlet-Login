@@ -15,7 +15,7 @@ public class LoggedProfile extends HttpServlet {
         resp.setContentType("text/html");
 
         PrintWriter out =resp.getWriter();
-        out.println("The profile "+LoginWelcomePage.userName+" was already logged in");
+        out.println("The profile "+LoginCheckServlet.userName+" was already logged in");
 
         out.println("<br><form action='loggingOut'>");
         out.println("<input type='submit' value='Logout'>");

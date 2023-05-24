@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 @WebServlet("/loginWelcome")
 public class LoginWelcomePage extends HttpServlet {
-    static String userName;
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session=req.getSession();

@@ -13,15 +13,14 @@ import java.util.ArrayList;
 
 @WebServlet("/signupWelcome")
 public class SignupWelcomePage extends HttpServlet {
-    static ArrayList storeMail=new ArrayList<>();
-    static ArrayList storeUserName=new ArrayList<>();
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session=req.getSession();
         String name= (String) session.getAttribute("signupName");
         String mail= (String) session.getAttribute("mail");
-        storeMail.add(mail);
-        storeUserName.add(name);
+        SignupCheckServlet.storeMail.add(mail);
+        SignupCheckServlet.storeUserName.add(name);
 
 
         PrintWriter out=resp.getWriter();
