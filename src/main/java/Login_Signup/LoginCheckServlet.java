@@ -21,7 +21,7 @@ public class LoginCheckServlet extends HttpServlet {
         String password = req.getParameter("login-password");
            ArrayList <String> loginUserName = new ArrayList<String>();
            loginUserName.addAll(SignupCheckServlet.storeUserName);
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(true);
         session.setAttribute("loginName", name);
 
            for (int i = 0; i < loginUserName.size(); i++) {

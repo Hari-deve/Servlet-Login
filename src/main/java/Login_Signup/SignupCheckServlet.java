@@ -28,7 +28,7 @@ public class SignupCheckServlet extends HttpServlet {
         PrintWriter out=resp.getWriter();
 
 
-        HttpSession session=req.getSession();
+        HttpSession session=req.getSession(true);
         session.setAttribute("signupName", name);
         session.setAttribute("mail",mail);
         session.setAttribute("password",setPassword);

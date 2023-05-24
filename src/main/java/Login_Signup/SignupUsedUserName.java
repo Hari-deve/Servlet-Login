@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 public class SignupUsedUserName extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session= req.getSession();
+        HttpSession session= req.getSession(false);
         String name= (String) session.getAttribute("signupName");
         PrintWriter writer=resp.getWriter();
         writer.println(name+" username has been used already");

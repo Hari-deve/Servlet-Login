@@ -15,7 +15,7 @@ public class SignupErrorPage extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        HttpSession session=req.getSession();
+        HttpSession session=req.getSession(false);
         String name=(String) session.getAttribute("signupName");
         PrintWriter out=resp.getWriter();
         out.println("Sorry "+name+ " Couldn't Create Account Check the inputs and Try Again");

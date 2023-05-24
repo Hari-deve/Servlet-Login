@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 public class SignupUsedMailError extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session= req.getSession();
+        HttpSession session= req.getSession(false);
         String mail= (String) session.getAttribute("mail");
         PrintWriter writer=resp.getWriter();
         writer.println(mail+" Mail has been used already");

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class LoginWelcomePage extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session=req.getSession();
+        HttpSession session=req.getSession(false);
         String name= (String) session.getAttribute("loginName");
         PrintWriter out=resp.getWriter();
         out.println("Welcome "+name+" You have logged in Successfully");

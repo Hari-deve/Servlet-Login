@@ -16,7 +16,7 @@ public class SignupWelcomePage extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session=req.getSession();
+        HttpSession session=req.getSession(false);
         String name= (String) session.getAttribute("signupName");
         String mail= (String) session.getAttribute("mail");
         SignupCheckServlet.storeMail.add(mail);

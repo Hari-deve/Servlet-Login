@@ -15,7 +15,7 @@ public class LoginErrorPage extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        HttpSession session=req.getSession();
+        HttpSession session=req.getSession(false);
         String name=(String) session.getAttribute("loginName");
         PrintWriter out=resp.getWriter();
         out.println("Sorry "+name+ " Incorrect Password Try Again");
