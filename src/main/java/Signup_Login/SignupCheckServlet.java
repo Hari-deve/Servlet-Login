@@ -1,11 +1,10 @@
-package Login_Signup;
+package Signup_Login;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 
 @WebServlet("/signup")
 public class SignupCheckServlet extends HttpServlet {
-
 
     static ArrayList<String> storeMail=new ArrayList<String>();
     static ArrayList<String> storeUserName=new ArrayList<String>();
@@ -28,11 +26,6 @@ public class SignupCheckServlet extends HttpServlet {
         PrintWriter out=resp.getWriter();
 
 
-        HttpSession session=req.getSession(true);
-        session.setAttribute("signupName", name);
-        session.setAttribute("mail",mail);
-        session.setAttribute("password",setPassword);
-
 
         for (int i = 0; i< storeMail.size()||i< storeUserName.size(); i++){
             if (mail.equals(storeMail.get(i))&&i<storeMail.size()){
@@ -44,14 +37,16 @@ public class SignupCheckServlet extends HttpServlet {
 
         if (setPassword.equals(name+"pass") && setPassword.equals(confirmPassword)) {
             if (name.equals(alreadyUsedName)){
-                resp.sendRedirect("usedUserName");
+                out.println(name+" is already in use");
             } else if (mail.equals(alreadyUsedMail)) {
-                resp.sendRedirect("usedMail");
+                out.println(mail+" is already in use");
             }else {
-                resp.sendRedirect("signupWelcome");
+                storeMail.add(mail);
+                storeUserName.add(name);
+                out.println("Welcome "+name+" You have Created Account Successfully");
             }
         }else {
-            resp.sendRedirect("signupError");
+            out.println(" Sorry Invalid Inputs Check and Try again");
         }
 
     }
