@@ -37,6 +37,8 @@ dependencies {
     testImplementation 'com.google.appengine:appengine-testing:+'
     testImplementation 'com.google.appengine:appengine-api-stubs:+'
     testImplementation 'com.google.appengine:appengine-tools-sdk:+'
+    implementation 'com.googlecode.objectify:objectify:5.1.22'
+
 
 
 }
