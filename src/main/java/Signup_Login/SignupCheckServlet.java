@@ -12,15 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
 @WebServlet("/signup")
 public class SignupCheckServlet extends HttpServlet {
-
-
-    static ArrayList<String> storeMail=new ArrayList<String>();
-    static ArrayList<String> storeUserName=new ArrayList<String>();
+    static HashMap<String,String>storeMailUserName=new HashMap<>();
 
     public void checkValues(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String alreadyUsedMail=null;
@@ -34,13 +32,20 @@ public class SignupCheckServlet extends HttpServlet {
 
 
 
-        for (int i = 0; i< storeMail.size()||i< storeUserName.size(); i++){
-            if (mail.equals(storeMail.get(i))&&i<storeMail.size()){
-                alreadyUsedMail=storeMail.get(i);
-            } else if (name.equals(storeUserName.get(i))&&i< storeUserName.size()) {
-                alreadyUsedName=storeUserName.get(i);
+
+        for (String verifyName:storeMailUserName.keySet()) {
+            if (name.equals(verifyName)){
+                alreadyUsedName=verifyName;
             }
         }
+
+        for (String verifyMail:storeMailUserName.values()) {
+            if (mail.equals(verifyMail)){
+                alreadyUsedMail=verifyMail;
+            }
+
+        }
+
 
         if (setPassword.equals(name+"pass") && setPassword.equals(confirmPassword)) {
             if (name.equals(alreadyUsedName)){
@@ -48,8 +53,8 @@ public class SignupCheckServlet extends HttpServlet {
             } else if (mail.equals(alreadyUsedMail)) {
                 out.println(mail+" is already in use");
             }else {
-                storeMail.add(mail);
-                storeUserName.add(name);
+
+                storeMailUserName.put(name,mail);
                 storingData(name,mail,confirmPassword);
                 out.println("Welcome "+name+" You have Created Account Successfully");
             }
@@ -94,6 +99,5 @@ public class SignupCheckServlet extends HttpServlet {
             List<SignupRecord> signupRecords = ofy.load().type(SignupRecord.class).list();
             return null;
         });
-
     }
 }

@@ -13,6 +13,7 @@ public class ObjectifyInitializer implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         ObjectifyService.begin();
         ObjectifyService.register(SignupRecord.class);
+        ObjectifyService.register(LoginRecord.class);
     }
 
     @Override
